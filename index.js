@@ -5,16 +5,19 @@ for(i=0; i<numberOfbutton; i++){
    function btnClicked(){
         var btnClicked = this.innerHTML;
         makeSound(btnClicked);
-        
+       buttonAnimation(btnClicked);
         
    }
 
 };
 
 
-document.addEventListener('keydown', function(event){
-      makeSound(event.key);
-});
+for (i = 0; i < numberOfbutton; i++) {
+    document.querySelectorAll(".drum")[i].addEventListener('keydown', function (event) {
+        makeSound(event.key);
+        buttonAnimation(event.key);
+    });
+}
 
 function makeSound(key){
 
@@ -49,9 +52,21 @@ function makeSound(key){
                 kick.play();
         break;
 
-        break;
         default: console.log(key);
         
 
         }
 }
+
+function buttonAnimation(currentKey) {
+    var currnetKeyClass = document.querySelector("." + currentKey);
+    currnetKeyClass.classList.add("pressed");
+
+    setTimeout(function () {
+        currnetKeyClass.classList.remove("pressed");
+    }, 100);
+
+
+}
+
+
